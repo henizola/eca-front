@@ -1333,3 +1333,7 @@ svg:hover {
     display: none;
   }
 }
+
+.hr{
+  padding-top:30px!important;
+}
