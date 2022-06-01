@@ -18,19 +18,18 @@
                     
       for (item of sliders) { %>
 
-        <div class="l-home-hero__cell js-header-carousel-cell">
+        <div class="l-home-hero__cell js-header-carousel-cell" style="position:relative">
           <div class="l-home-hero__media">
-            <img alt="" srcset="<%= API%><%= item.bannerImage %>" sizes="(min-width: 980px) 100vw,
-            100vw">
+            <img style="height:100%;object-fit:cover;" alt="" srcset="<%= API%><%= item.bannerImage %>" >
           </div>
           <div class="l-home-hero__content">
             <div class="l-home-hero__content-intro">
               <h2 class="u-type-h1 u-type-shadowed heading--l "> <%= item.titleEn %></h2>
   
             </div>
-            <div class="l-home-hero__content-cta"> <a href="newsdtl.html" class="btn btn--arrow">
+            <!-- <div class="l-home-hero__content-cta"> <a href="newsdtl.html" class="btn btn--arrow">
               Read More</a>
-            </div>
+            </div> -->
           </div>
         </div>
         <!-- <%= item.size %> -->
