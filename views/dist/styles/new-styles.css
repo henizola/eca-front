@@ -1047,8 +1047,9 @@ svg:hover {
   width: 1.6rem;
   height: 3px;
   border-radius: 3px;
-  background-color: #fff;
+  background-color: #005274;
   position: relative;
+  margin-top:10px;
   z-index: 1001;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -1058,9 +1059,10 @@ svg:hover {
 .all .hamburger-menu div:after {
   content: "";
   position: absolute;
+ 
   width: inherit;
   height: inherit;
-  background-color: #fff;
+  background-color: #005274;
   border-radius: 3px;
   -webkit-transition: 0.5s;
   transition: 0.5s;

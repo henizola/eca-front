@@ -16,6 +16,7 @@ const banner = require("./route/banner");
 const email = require("./route/email");
 const slogan = require("./route/slogan");
 const renderDirectivesEn = require("./render/render-directivesEn");
+const renderSearch = require("./render/render-search");
 
 // ////////////////////////////////////////////////////////////////////////
 // const { apps } = require('./route/authentication');
@@ -37,6 +38,7 @@ const dailyShow = require("./route/daily-shows");
 const rednderDirectivesAm = require("./render/render-directivesAm");
 const renderHome = require("./render/render-homeEn");
 const renderHomeAm = require("./render/render-HomeAm");
+const rednderServices = require("./render/Services");
 
 app.use(cors());
 ////////////////////////////////////////////////////////////////////////
@@ -107,6 +109,8 @@ app.patch("/get-bugs/:index", (req, res) => {
 });
 
 app.get("/resourceAm", rednderDirectivesAm);
+app.get("/services", rednderServices);
+app.get("/search", renderSearch);
 
 app.get("/contact", (req, res) => {
   res.render("contact");
