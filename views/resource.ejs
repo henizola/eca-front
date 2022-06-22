@@ -240,7 +240,16 @@
                           <tbody>
     
 
-                    
+                            <% 
+                      
+                            for (item of frameworks) { %>
+            <tr >
+      
+                                <td> <a href="<%= API%><%= item.fileName %>" download style="color:black"> <%= item.name %></a> </td>
+                
+                                <td><%= item.size %> MB</td>
+                              </tr>
+                            <% } %>
     
     
                           </tbody>
