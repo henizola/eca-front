@@ -9,9 +9,9 @@ const rednderDirectivesEn = async (req, res) => {
 
   const law = await EcaLaws.find();
 
-  policy = await EcaPolicy.find();
+  const policy = await EcaPolicy.find();
 
-  framework = (await EcaFrameworks.find()) ? await EcaFrameworks.find() : [];
+  const framework = await EcaFrameworks.find();
 
   res.render("resource", {
     directives: directives,
