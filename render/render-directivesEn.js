@@ -5,13 +5,13 @@ const EcaFrameworks = require("../models/frameworks-model");
 const API = require("../api.js");
 
 const rednderDirectivesEn = async (req, res) => {
-  const directives = await EcaDirectives.find({ name: /nglish/i });
+  let directives = await EcaDirectives.find({ name: /nglish/i });
 
-  const law = await EcaLaws.find();
+  let law = await EcaLaws.find();
 
-  const policy = await EcaPolicy.find();
+  let policy = await EcaPolicy.find();
 
-  const framework = [];
+  let framework = await EcaFrameworks.find();
 
   res.render("resource", {
     directives: directives,
