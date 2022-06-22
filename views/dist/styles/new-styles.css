@@ -1339,3 +1339,9 @@ svg:hover {
 .hr{
   padding-top:30px!important;
 }
+
+
+footer a:hover{
+color:#fff!important;
+text-decoration: none!important;
+}
