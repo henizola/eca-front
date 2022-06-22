@@ -7,34 +7,18 @@ const cookieParser = require("cookie-parser");
 dotenv.config({ path: "./config.env" });
 ////////////////////////////////////////////////////////////////////
 const signin = require("./route/sign-in");
-const news = require("./route/news");
-const blog = require("./route/blog");
 const directives = require("./route/directives");
-const tv = require("./route/tv-guide");
-const contact = require("./route/contact");
+const laws = require("./route/laws");
+const frameworks = require("./route/frameworks");
+const policy = require("./route/policy");
 const banner = require("./route/banner");
-const email = require("./route/email");
-const slogan = require("./route/slogan");
+const organizationalStructure = require("./route/org-struct");
 const renderDirectivesEn = require("./render/render-directivesEn");
 const renderSearch = require("./render/render-search");
 
-// ////////////////////////////////////////////////////////////////////////
-// const { apps } = require('./route/authentication');
-// const test = require('./route/test');
-// ////////////////////////////////////////////////////////////////////////////
-
 const bodyParser = require("body-parser");
-const youtube = require("./route/youtube");
-
-const weather = require("./route/weathers");
-
-const weekly = require("./route/weekly");
 
 const app = express();
-
-const dailyShow = require("./route/daily-shows");
-
-// const livePromo = require('./route/live-promo');
 const rednderDirectivesAm = require("./render/render-directivesAm");
 const renderHome = require("./render/render-homeEn");
 const renderHomeAm = require("./render/render-HomeAm");
@@ -55,7 +39,11 @@ mongoose
   .catch((error) => console.log("could not connect to database" + error));
 
 app.use(express.static("./banners"));
+app.use(express.static("./frameworks"));
+app.use(express.static("./laws"));
+app.use(express.static("./policy"));
 app.use(express.static("./directives"));
+app.use(express.static("./organizationalStructure"));
 
 app.use(express.json());
 
@@ -72,40 +60,6 @@ const port = process.env.PORT || 9001;
 
 app.get("/about", (req, res) => {
   res.render("about");
-});
-
-app.get("/get-bugs", (req, res) => {
-  res.send([
-    {
-      id: 1,
-      description: "Bug 1",
-      userId: 1,
-      resolved: true,
-    },
-    {
-      id: 2,
-      description: "Bug 2",
-      userId: 1,
-    },
-    {
-      id: 3,
-      description: "Bug 3",
-      userId: 2,
-    },
-    {
-      id: 4,
-      description: "Bug 4",
-    },
-  ]);
-});
-
-app.post("/get-bugs", (req, res) => {
-  res.send(req.body);
-});
-
-app.patch("/get-bugs/:index", (req, res) => {
-  id = req.params.index;
-  res.send({ id: id, resolved: req.body.resolved });
 });
 
 app.get("/resourceAm", rednderDirectivesAm);
@@ -130,19 +84,11 @@ app.get("/services", (req, res) => {
 });
 
 app.use("/api", signin);
-app.use("/api", news);
 app.use("/api", directives);
-app.use("/api", blog);
-app.use("/api", tv);
-app.use("/api", slogan);
-
-app.use("/api", email);
-app.use("/api", dailyShow);
-
-app.use("/api", contact);
-app.use("/api", weather);
-app.use("/api", weekly);
-app.use("/api", youtube);
+app.use("/api", laws);
+app.use("/api", policy);
+app.use("/api", frameworks);
 app.use("/api", banner);
+app.use("/api", organizationalStructure);
 
 app.listen(port, () => console.log(`listening to port ${port}`));

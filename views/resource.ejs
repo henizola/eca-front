@@ -66,7 +66,7 @@
                         <tbody>
   
   
-  
+                          <% if(policy){ %>
   
   
                           <% 
@@ -80,7 +80,7 @@
                             </tr>
                           <% } %>
                   
-  
+                          <% } %>
   
                         </tbody>
                       </table>
@@ -243,14 +243,16 @@
     
     
     
-                     
+                            <% 
+                      
+                            for (item of framework) { %>
             <tr >
       
-                                <td> <a href="../directives//Universal-Access-and-Service-Framework.pdf" download style="color:black">Universal-Access-and-Service-Framework.pdf</a> </td>
+                                <td> <a href="<%= API%><%= item.fileName %>" download style="color:black"> <%= item.name %></a> </td>
                 
-                                <td>1 MB</td>
+                                <td><%= item.size %> MB</td>
                               </tr>
-                  
+                            <% } %>
                     
     
     

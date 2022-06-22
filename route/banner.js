@@ -67,7 +67,7 @@ app.post(
   }
 );
 
-app.post("/delete-banner", editor, async (req, res) => {
+app.post("/delete-banner", async (req, res) => {
   if (!req.body.id) {
     return res.status(400).send("bad request");
   }

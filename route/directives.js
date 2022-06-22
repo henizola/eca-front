@@ -1,89 +1,74 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const path = require("path");
 const app = express();
-const fs = require('fs');
-const multer = require('multer');
+const fs = require("fs");
+const multer = require("multer");
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 ////////////////////////////////////////////////////////////////
 // const { auth } = require('./authentication');
-const { admin, editor } = require('./super');
+const { admin, editor } = require("./super");
 ////////////////////////////////////////////////////////////////
- 
-const EcaDirectives = require('../models/directives-model')
+
+const EcaDirectives = require("../models/directives-model");
 
 const storage = multer.diskStorage({
   destination: function (req, res, cb) {
-    cb(null, path.join(__dirname, '..', 'directives'));
+    cb(null, path.join(__dirname, "..", "directives"));
   },
   filename: function (req, file, cb) {
     const now = new Date().toISOString();
-    const date = now.replace(/:/g, '-');
+    const date = now.replace(/:/g, "-");
     cb(null, date + file.originalname);
   },
 });
 const upload = multer({ storage: storage });
 
 app.post(
-  '/add-directive',
+  "/add-directive",
   // editor,
 
-  upload.single('directive'),
+  upload.single("directive"),
   async (req, res) => {
-
-    
     if (!req.file) {
-      return res
-        .status(400)
-        .send('Plese send a pdf');
+      return res.status(400).send("Plese send a pdf");
     }
 
     var fileSizeInBytes = req.file.size;
- 
 
-    var fileSizeInMegabytes = fileSizeInBytes / (1024*1024);
+    var fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
 
-    console.log('hre',fileSizeInMegabytes)
+    console.log("hre", fileSizeInMegabytes);
     const directive = new EcaDirectives({
       name: req.file.originalname,
-      fileName:req.file.filename,
-      size:fileSizeInMegabytes.toFixed(2)
+      fileName: req.file.filename,
+      size: fileSizeInMegabytes.toFixed(2),
     });
     const result = await directive.save();
     res.send(result);
   }
 );
 
-
-
-app.post('/get-directives', async (req, res) => {
+app.post("/get-directives", async (req, res) => {
   const ad = await EcaDirectives.find();
-  
+
   res.status(200).send(ad);
 });
 
-
-
 app.post(
-  '/change-directive',
+  "/change-directive",
   // editor,
-  upload.single('directive'),
+  upload.single("directive"),
   async (req, res) => {
-
     if (!req.file || !req.body.id) {
-      return res.status(400).send('bad request');
+      return res.status(400).send("bad request");
     }
 
     const directivess = await EcaDirectives.findOne({
       fileName: req.body.id,
     });
 
-    const file = path.join(
-      __dirname,
-      '..',
-      'directives',
-      directivess.fileName
-    );
+    const file = path.join(__dirname, "..", "directives", directivess.fileName);
 
     const feature = await EcaDirectives.updateOne(
       {
@@ -107,43 +92,20 @@ app.post(
     }
   }
 );
-
-app.post(
-  '/delete-directive',
-  // editor,
-  async (req, res) => {
-
-    if (!req.body.name) {
-      return res.status(400).send('bad request');
-    }
-    const file = path.join(
-      __dirname,
-      '..',
-      'directives',
-      req.body.name
-    );
-    const feature = await EcaDirectives.updateOne(
-      {
-      fileName: req.body.id,
-      },
-      {
-        $set: { Directives: req.file.filename },
-      }
-    );
-    if (feature.nModified) {
-      fs.unlink(file, (err) => {
-        if (err) res.status(500).send(err);
-        else {
-          return res.send(feature);
-        }
-      });
-      // res.send(feature);
-    } else {
-      res.send(feature);
-    }
+app.post("/delete-directive", async (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).send("bad request");
   }
-);
+  const blog = await EcaDirectives.deleteOne({
+    _id: req.body.id,
+  });
 
+  if (!blog) {
+    return res.status(404).send("Blog Not Found");
+  }
+
+  res.send(blog);
+});
 
 // app.post(
 //   '/edit-ad',
