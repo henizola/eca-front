@@ -67,4 +67,19 @@ app.post(
   }
 );
 
+app.post("/delete-banner", editor, async (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).send("bad request");
+  }
+  const blog = await EcaBanner.deleteOne({
+    _id: req.body.id,
+  });
+
+  if (!blog) {
+    return res.status(404).send("Blog Not Found");
+  }
+
+  res.send(blog);
+});
+
 module.exports = app;
