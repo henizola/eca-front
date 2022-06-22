@@ -11,7 +11,7 @@ const rednderDirectivesEn = async (req, res) => {
 
   const policy = await EcaPolicy.find();
 
-  const framework = await EcaFrameworks.find();
+  const framework = [];
 
   res.render("resource", {
     directives: directives,
