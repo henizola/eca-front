@@ -6839,7 +6839,7 @@ button.h-nav__link:focus {
   font-size: 4.16rem;
 }
 .heading--l {
-  font-size: 6.1rem;
+  font-size: 4.1rem;
   font-weight: 900;
   line-height: 1.1;
   font-family: gothic;
@@ -13045,4 +13045,8 @@ svg:hover {
 
   margin-top:50vh;
   width:150%;
+}
+
+p,h2{
+  font-size: 16px!important;
 }
