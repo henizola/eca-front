@@ -13047,6 +13047,10 @@ svg:hover {
   width:150%;
 }
 
+.top-70{
+  margin-top:-70px!important
+}
+
 p,h2{
   font-size: 16px!important;
 }
@@ -13056,4 +13060,8 @@ p,h2{
     margin-top:0!important;
  font-size: 19px!important;
   }
+  .top-70{
+    margin-top:0px!important
+  }
+  
 }
